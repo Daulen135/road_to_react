@@ -1,4 +1,5 @@
 import * as React from 'react'
+
 const list = [
   {
     title: 'React',
@@ -17,14 +18,16 @@ const list = [
     objectID: 1,
   },
 ];
+
 const welcome ={
   greeting: "Hey",
   title: "React"
 }
 
+// Add a debugger statement to stop the debugger at this point
+// debugger;
 
-
-function App() {
+const  App = () => {
   
   
 
@@ -37,25 +40,48 @@ function App() {
       </h1>
 
 
-      <label htmlFor="search">Search: </label>
-      <input id="search" type="text" />
-
+    <Search />
       <hr />
-      <ul>
-        {list.map(function(item){
-          return <li key={item.objectID}>
-            <span> <a href ={item.url}> {item.title}</a></span>
-            <span> {item.author}</span>
-            <span> {item.num_comments}</span>
-            <span> {item.points}</span>
-
-            </li>
-
-
-        })}
-      </ul>
+      <List />
     </div>
   );
 }
+
+const  List = () => 
+  (
+    <ul>
+      {list.map(
+        (item) => (
+         
+          <li key={item.objectID}>
+            <span>
+              <a href={item.url}>{item.title}</a>
+            </span>
+            <span>{item.author}</span>
+            <span>{item.num_comments}</span>
+            <span>{item.points}</span>
+          </li>
+        )
+      )}
+    </ul>
+  );
+
+
+  const Search = () => {
+    // perform a task in between
+   const handleChange =(event)=>{
+    console.log(event)
+
+    console.log(event.target.value);
+   }
+    return (
+      <div>
+        <label htmlFor="search">Search: </label>
+        <input id="search" type="text" onBlur={handleChange} onChange={handleChange}/>
+      </div>
+    );
+  };
+
+
 
 export default App
